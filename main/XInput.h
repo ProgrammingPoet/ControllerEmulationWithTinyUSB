@@ -1,6 +1,8 @@
-const char LANG_ID[] = { 0x09, 0x04 };
+//XInput.h
 
 namespace XINPUT {
+
+    const char LANG_ID[] = { 0x09, 0x04 };
     const tusb_desc_device_t DEVICE_DESC = {
     .bLength            = sizeof(tusb_desc_device_t),
     .bDescriptorType    = TUSB_DESC_DEVICE,          
@@ -50,11 +52,28 @@ namespace XINPUT {
         0x07, 0x05, 0x01, 0x03, 0x20, 0x00, 0x08
     };
     const std::array<const char*, 5> STRING_DESC = {
-        &(LANG_ID[0]),
+        &(XINPUT::LANG_ID[0]),
         static_cast<const char*>("Microsoft Corporation"),
         static_cast<const char*>("Controller"),
         static_cast<const char*>("04B229A"),
         static_cast<const char*>("Xbox Security Method 3, Version 1.00, \xC2\xA9 2005 Microsoft Corporation. All rights reserved.")
     };
+
+    #pragma pack(push, 1)
+    struct {
+        uint8_t REPORT_ID;                // Report ID (usually 0x00 for data)
+        uint8_t REPORT_SIZE = 20;              // Report Size (usually 0x14, which is 20 decimal)
+        uint8_t BUTTONS1;  // D-Pad, Start, Back, Stick Clicks
+        uint8_t BUTTONS2;  // A, B, X, Y, LB, RB, Guide
+        uint8_t LT;                 // Left Trigger (0-255)
+        uint8_t RT;                 // Right Trigger (0-255)
+        int16_t LX;                // Left Stick X (-32768 to 32767)
+        int16_t LY;                // Left Stick Y
+        int16_t RX;                // Right Stick X
+        int16_t RY;                // Right Stick Y
+        uint8_t RESERVED[6];      // Reserved/Padding
+    } REPORT{};
+    #pragma pack(pop)
+
 }
 
