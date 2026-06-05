@@ -4,20 +4,20 @@ namespace XINPUT {
 
     const char LANG_ID[] = { 0x09, 0x04 };
     const tusb_desc_device_t DEVICE_DESC = {
-    .bLength            = sizeof(tusb_desc_device_t),
-    .bDescriptorType    = TUSB_DESC_DEVICE,          
-    .bcdUSB             = 0x0200,                    
-    .bDeviceClass       = 0xFF,                      
-    .bDeviceSubClass    = 0xFF,
-    .bDeviceProtocol    = 0xFF,
-    .bMaxPacketSize0    = CFG_TUD_ENDPOINT0_SIZE,    
-    .idVendor           = 0x045E,                    
-    .idProduct          = 0x028E,                    
-    .bcdDevice          = 0x0114,                   
-    .iManufacturer      = 0x01,                       
-    .iProduct           = 0x02,                     
-    .iSerialNumber      = 0x03,                      
-    .bNumConfigurations = 0x01                    
+        .bLength            = sizeof(tusb_desc_device_t),
+        .bDescriptorType    = TUSB_DESC_DEVICE,          
+        .bcdUSB             = 0x0200,                    
+        .bDeviceClass       = 0xFF,                      
+        .bDeviceSubClass    = 0xFF,
+        .bDeviceProtocol    = 0xFF,
+        .bMaxPacketSize0    = CFG_TUD_ENDPOINT0_SIZE,    
+        .idVendor           = 0x045E,                    
+        .idProduct          = 0x028E,                    
+        .bcdDevice          = 0x0114,                   
+        .iManufacturer      = 0x01,                       
+        .iProduct           = 0x02,                     
+        .iSerialNumber      = 0x03,                      
+        .bNumConfigurations = 0x01                    
     };
     const std::array<uint8_t, 49> CONFIG_DESC = {
             // --- Configuration Descriptor Header ---
@@ -60,7 +60,7 @@ namespace XINPUT {
     };
 
     #pragma pack(push, 1)
-    struct {
+    struct REPORT{
         uint8_t REPORT_ID;                // Report ID (usually 0x00 for data)
         uint8_t REPORT_SIZE = 20;              // Report Size (usually 0x14, which is 20 decimal)
         uint8_t BUTTONS1;  // D-Pad, Start, Back, Stick Clicks
@@ -72,7 +72,7 @@ namespace XINPUT {
         int16_t RX;                // Right Stick X
         int16_t RY;                // Right Stick Y
         uint8_t RESERVED[6];      // Reserved/Padding
-    } REPORT{};
+    };
     #pragma pack(pop)
 
 }
